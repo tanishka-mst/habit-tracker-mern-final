@@ -4,21 +4,22 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
 import authRoutes        from "./routes/authRoutes.js";
 import habitRoutes       from "./routes/habitRoutes.js";
 import habitLogRoutes    from "./routes/habitLogRoutes.js";
 import dashboardRoutes   from "./routes/dashboardRoutes.js";
 import achievementRoutes from "./routes/achievementRoutes.js";
 
-console.log("MONGO_URI =", process.env.MONGO_URI);
-
 connectDB();
 
 const app = express();
 
-// ✅ Allow React frontend
 app.use(cors({
-  origin: "*",
+  origin: [
+    "http://localhost:5173",
+    "https://YOUR-VERCEL-URL.vercel.app"
+  ],
   credentials: true,
 }));
 
@@ -35,4 +36,6 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
+);
