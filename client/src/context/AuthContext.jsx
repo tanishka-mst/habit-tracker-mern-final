@@ -93,9 +93,11 @@ export function AuthProvider({ children }) {
   }
 
   // POST /api/auth/register → { success, message, user }
-  const register = async (name, email, password) => {
+  const register = async (name, email, password, securityQuestion, securityAnswer) => {
     try {
-      const { data } = await api.post('/auth/register', { name, email, password })
+      const { data } = await api.post('/auth/register', {
+        name, email, password, securityQuestion, securityAnswer
+      })
       if (data.success) return { ok: true }
       return { ok: false, error: data.message || 'Registration failed' }
     } catch (err) {

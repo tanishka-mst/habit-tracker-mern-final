@@ -4,21 +4,17 @@ import authMiddleware from "../middleware/authMiddleware.js";
 import {
   registerUser,
   loginUser,
-  getProfile,forgotPassword,resetPassword,
+  getProfile,
+  getSecurityQuestion,
+  resetWithAnswer,
 } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+router.post("/register",               registerUser);
+router.post("/login",                  loginUser);
 router.get("/profile", authMiddleware, getProfile);
-router.post(
-  "/forgot-password",
-  forgotPassword
-);
-router.post(
-  "/reset-password/:token",
-  resetPassword
-);
+router.post("/get-security-question",  getSecurityQuestion);
+router.post("/reset-with-answer",      resetWithAnswer);
 
 export default router;

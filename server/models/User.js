@@ -18,13 +18,16 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    resetPasswordToken: {
-  type: String,
-},
+    // ── Security Question for Forgot Password ──
+    securityQuestion: {
+      type: String,
+      default: "",
+    },
 
-resetPasswordExpire: {
-  type: Date,
-},
+    securityAnswer: {
+      type: String,  // stored as lowercased + trimmed
+      default: "",
+    },
 
     level: {
       type: Number,
