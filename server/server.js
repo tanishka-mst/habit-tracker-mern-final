@@ -17,11 +17,14 @@ const app = express();
 
 app.use(cors({
   origin: [
-    "http://localhost:5173",
-    "https://YOUR-VERCEL-URL.vercel.app"
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://habit-tracker-mern-final-git-main-tanishka6.vercel.app',
+    'https://habit-tracker-mern-final.vercel.app',
   ],
   credentials: true,
 }));
+
 
 app.use(express.json());
 
