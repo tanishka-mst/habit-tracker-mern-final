@@ -24,6 +24,7 @@ export default function HabitModal({ open, onClose, onSave, editing }) {
   return (
     <div
       onClick={e => e.target === e.currentTarget && onClose()}
+      className="modal-wrap"
       style={{
         position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)',
         backdropFilter: 'blur(8px)', zIndex: 100,
@@ -31,13 +32,16 @@ export default function HabitModal({ open, onClose, onSave, editing }) {
         animation: 'fadeIn 0.2s ease',
       }}
     >
-      <div style={{
+      <div className="modal-inner" style={{
         background: 'var(--card2)', border: '1px solid var(--border2)',
         borderRadius: 20, padding: '2rem', width: '100%', maxWidth: 480,
         maxHeight: '90vh', overflowY: 'auto',
         boxShadow: 'var(--glow)',
         animation: 'slideUp 0.25s ease',
       }}>
+        {/* Mobile drag handle */}
+        <div style={{ width: 40, height: 4, borderRadius: 4, background: 'rgba(255,255,255,0.12)', margin: '0 auto 1.25rem' }} />
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <h2 style={{ fontFamily: 'Sora,sans-serif', fontSize: '1.2rem', fontWeight: 700 }}>
             {editing ? 'Edit Habit' : 'Add New Habit'}
@@ -61,7 +65,8 @@ export default function HabitModal({ open, onClose, onSave, editing }) {
           />
         </Field>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        {/* className="form-row" makes it 1-col on mobile */}
+        <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <Field label="Category">
             <select value={form.category} onChange={e => set('category', e.target.value)} style={inputStyle}>
               {['General','Health','Fitness','Learning','Mindfulness'].map(c => <option key={c}>{c}</option>)}

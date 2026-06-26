@@ -34,12 +34,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: var(--card); }
 ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 5px; }
 
-/* Animations */
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -52,18 +50,41 @@ body {
   0%   { transform: scale(1); opacity: 1; }
   100% { transform: scale(2.8); opacity: 0; }
 }
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes ringFill {
-  from { stroke-dashoffset: var(--ring-start); }
-  to   { stroke-dashoffset: var(--ring-end); }
-}
 
 .anim-up   { animation: slideUp 0.38s ease both; }
 .anim-fade { animation: fadeIn 0.28s ease both; }
+
+/* ── Mobile bottom nav ── */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+  padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .desktop-sidebar  { display: none !important; }
+  .bottom-nav       { display: flex; justify-content: space-around; align-items: center; }
+  .main-wrapper     { margin-left: 0 !important; padding-bottom: 80px; }
+  .main-padding     { padding: 1rem !important; }
+  .topbar-wrap      { padding: 0.75rem 1rem !important; }
+  .topbar-date      { display: none; }
+  .stats-grid       { grid-template-columns: repeat(2,1fr) !important; }
+  .stats-grid-3     { grid-template-columns: repeat(2,1fr) !important; gap: 0.75rem !important; }
+  .chart-row        { grid-template-columns: 1fr !important; }
+  .profile-header   { flex-direction: column !important; text-align: center; }
+  .profile-stats    { grid-template-columns: repeat(2,1fr) !important; }
+  .ach-grid         { grid-template-columns: repeat(2,1fr) !important; }
+  .modal-inner      { border-radius: 20px 20px 0 0 !important; margin-top: auto; }
+  .modal-wrap       { align-items: flex-end !important; }
+  .form-row         { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid   { grid-template-columns: repeat(2,1fr) !important; }
+  .ach-grid     { grid-template-columns: repeat(2,1fr) !important; }
+}

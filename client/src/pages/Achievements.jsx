@@ -32,7 +32,8 @@ export default function Achievements() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(190px,1fr))', gap: '1rem' }}>
+      {/* className="ach-grid" makes it 2-col on mobile */}
+      <div className="ach-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(190px,1fr))', gap: '1rem' }}>
         {ACHIEVEMENTS_DEF.map(a => {
           const unlocked = achievements.includes(a.id)
           return (

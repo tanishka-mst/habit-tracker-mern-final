@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react'
 import { useAuth } from '../context/AuthContext'
 import {
@@ -18,7 +17,6 @@ export default function Analytics() {
   const { habits, logs } = useAuth()
   const completed = logs.filter(l => l.completed)
 
-  // Last 7 days bar chart
   const weekData = useMemo(() => {
     const days = []
     for (let i = 6; i >= 0; i--) {
@@ -33,7 +31,6 @@ export default function Analytics() {
     return days
   }, [logs])
 
-  // 30-day area
   const monthData = useMemo(() => {
     const days = []
     for (let i = 29; i >= 0; i--) {
@@ -47,7 +44,6 @@ export default function Analytics() {
     return days
   }, [logs])
 
-  // Category breakdown
   const catData = useMemo(() => {
     const map = {}
     completed.forEach(l => {
@@ -58,7 +54,6 @@ export default function Analytics() {
     return Object.entries(map).map(([name, value]) => ({ name, value })).sort((a,b)=>b.value-a.value)
   }, [logs, habits])
 
-  // Heatmap: 5 weeks
   const heatmap = useMemo(() => {
     const cells = []
     for (let i = 34; i >= 0; i--) {
@@ -83,14 +78,14 @@ export default function Analytics() {
   return (
     <div className="anim-up">
       {/* Top stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="stats-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
         <MiniCard label="Total Completions" value={total} accent="var(--violet)" />
         <MiniCard label="Avg. Per Day (7d)"  value={avg}   accent="var(--mint)" />
         <MiniCard label="Best Day This Week" value={bestDay} accent="var(--amber)" />
       </div>
 
-      {/* Charts row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+      {/* Charts row — className="chart-row" makes it 1-col on mobile */}
+      <div className="chart-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
         <ChartCard title="Weekly completions">
           <ResponsiveContainer width="100%" height={160}>
             <BarChart data={weekData} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
@@ -207,6 +202,3 @@ function ChartCard({ title, children }) {
     </div>
   )
 }
-
-
-

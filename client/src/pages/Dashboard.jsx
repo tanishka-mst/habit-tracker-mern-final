@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth, completedToday, streakFor } from '../context/AuthContext'
@@ -24,8 +23,8 @@ export default function Dashboard({ onAddHabit, onEdit }) {
 
   return (
     <div className="anim-up">
-      {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+      {/* Stats — className="stats-grid" makes it 2-col on mobile */}
+      <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
         <StatCard label="Total Habits"   value={active.length} sub="Active habits"   icon="🎯" accent="var(--violet)" />
         <StatCard label="Done Today"     value={done}          sub="Completed"        icon="✅" accent="var(--mint)"   />
         <StatCard label="Completion"     value={rate + '%'}    sub="Today's rate"     icon="⚡" accent="var(--amber)"  />
@@ -57,7 +56,7 @@ export default function Dashboard({ onAddHabit, onEdit }) {
       {totalLogs > 0 && (
         <div style={{ marginTop: '2rem', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 16, padding: '1.25rem 1.5rem' }}>
           <h3 style={{ fontFamily: 'Sora,sans-serif', fontSize: '0.95rem', fontWeight: 700, marginBottom: '1rem' }}>All-time stats</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem' }}>
+          <div className="stats-grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem' }}>
             <MiniStat label="Total completions" value={totalLogs} />
             <MiniStat label="Habits created"    value={habits.length} />
             <MiniStat label="Best streak ever"  value={`${bestStreak}d`} />
@@ -119,6 +118,3 @@ const ghostBtn = {
   color: 'var(--text)', border: '1px solid var(--border)', fontSize: '0.8rem',
   fontWeight: 500, cursor: 'pointer', fontFamily: 'Inter,sans-serif',
 }
-
-
-
